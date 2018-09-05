@@ -3,6 +3,8 @@
 require_once("Slotter.php");
 $slot = new Slotter;
 
+// Fazer aqui via GET/POST, whatever
+$slot->reserva_slots_nicho('medio', 3);
 ?>
 
 
@@ -29,8 +31,8 @@ $slot = new Slotter;
             font-size: 25px;
         }
 
-        .yellow {
-            color: yellow;
+        .red {
+            color: red;
             padding: 1px;
             font-size: 25px;
         }
