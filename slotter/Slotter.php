@@ -16,7 +16,7 @@ class Slotter
     {
         $this->aloca_nichos($qtd_medio, $qtd_grande, $num_slots);
         // TESTING
-        // var_dump($this->nichos_medios);
+        var_dump($this->nichos_medios);
         // var_dump($this->nichos_grandes);
     }
     /**
@@ -48,19 +48,33 @@ class Slotter
      */
     public function reserva_slots_nicho(string $tam_nicho, int $qtd_slots)
     {
+        $num_alocados = 0;
+
         if ($tam_nicho == 'medio') {
-            $nichos = $this->nichos_medios;
+            $nichos = &$this->nichos_medios;
         } else {
-            $nichos = $this->nichos_grandes;
+            $nichos = &$this->nichos_grandes;
         }
 
-        foreach ($nichos as $nicho) {
+        // refazer essa gambi com array_walk ou array_map
+        foreach ($nichos as $cod_nicho => &$slots) {
+            if ($num_alocados == $qtd_slots) {
+                break;
+            }
 
+            // Varre os slots e os aloca
+            foreach ($slots as &$slot) {
+                if ($num_alocados == $qtd_slots) {
+                    break;
+                }
+                // Se está vazio, aloca
+                if ($slot == '0') {
+                    $slot = '1';
+
+                    $num_alocados++;
+                }
+            }
         }
-    }
-
-    public function aloca_slot()
-    {
     }
 
     /**
@@ -79,13 +93,22 @@ class Slotter
                 if ($slot == '0') {
                     echo '<i class="fas fa-check-square green"></i>';
                 } else {
-                    echo '<i class="fas fa-mobile-alt yellow"></i>';
-
+                    echo '<i class="fas fa-mobile-alt red"></i>';
                 }
             }
             echo "</td>";
 
             echo "</tr>";
         }
+    }
+    // REPETIR PARA NICHOS GRANDES OU ADAPTAR PARA REUSO
+
+    /**
+     * Mostra o resultado final do array
+      */
+    public function __destruct()
+    {
+        echo "<h6>DEBUGGING - array final </h6>";
+        var_dump($this->nichos_medios);
     }
 }
