@@ -16,8 +16,8 @@ class Slotter
     {
         $this->aloca_nichos($qtd_medio, $qtd_grande, $num_slots);
         // TESTING
-        var_dump($this->nichos_medios);
-        var_dump($this->nichos_grandes);
+        // var_dump($this->nichos_medios);
+        // var_dump($this->nichos_grandes);
     }
     /**
      * Aloca em memória quantos nichos existem
@@ -63,4 +63,29 @@ class Slotter
     {
     }
 
+    /**
+     * Mostra nichos médios e seus conteúdos
+     */
+    public function echo_nichos_medios()
+    {
+        foreach ($this->nichos_medios as $nicho => $conteudo) {
+            echo "<tr>";
+
+            echo "<td>" . $nicho . "</td>";
+
+            echo "<td>";
+            foreach ($conteudo as $slot) {
+                // Se está vazio...
+                if ($slot == '0') {
+                    echo '<i class="fas fa-check-square green"></i>';
+                } else {
+                    echo '<i class="fas fa-mobile-alt yellow"></i>';
+
+                }
+            }
+            echo "</td>";
+
+            echo "</tr>";
+        }
+    }
 }
